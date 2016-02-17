@@ -10,12 +10,24 @@ class Bacterie{
    // =========================================================================
   //                               Attribut classe
   // =========================================================================
+  //taux d'absorption ou de conversion des molécules
+  static const float RAA ;
+  static const float RAB ;
+  static const float RBB ;
+  static const float RBC ;
+  //probabilités de mort et de mutation
+  static const float Pdeath ;
+  static const float Pmut ;
+  //fitness minimum
+  static const float WMIN ;
+
   
- 
   // =========================================================================
   //                               Constructors
   // =========================================================================
-
+  Bacterie() ;
+  Bacterie(const Bacterie& model) ;
+  Bacterie(int x , int y, char G) ;
   // =========================================================================
   //                                Destructor
   // =========================================================================
@@ -45,7 +57,20 @@ class Bacterie{
   // =========================================================================
   //                                Attributes
   // =========================================================================
-
+  //position dans l'environnement
+  int x_ ;
+  int y_ ;
+  //génotype, égal à A ou B
+  char G_ ; 
+  //concentrations internes
+  float A_ ;
+  float B_ ;
+  float C_ ;
+  //fitness
+  float w_ ;
+  //booléen pour savoir si la bactérie s'est déjà divisée ou non
+  bool div_ ;
+  
 };
 // ===========================================================================
 //                            Getters' definitions
