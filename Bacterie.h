@@ -35,7 +35,14 @@ class Bacterie{
   // =========================================================================
   //                                  Getters
   // =========================================================================
-
+  inline int x() const;
+  inline int y() const;
+  inline char G() const;
+  inline float A() const;
+  inline float B() const;
+  inline float C() const;
+  inline float w() const;
+  inline bool div() const;
   // =========================================================================
   //                                  Setters
   // =========================================================================
@@ -75,8 +82,37 @@ class Bacterie{
 // ===========================================================================
 //                            Getters' definitions
 // ===========================================================================
+inline int Bacterie::x() const{
+  return x_ ;
+}
 
+inline int Bacterie::y() const{
+  return y_ ;
+}
 
+inline char Bacterie::G() const{
+  return G_ ;
+}
+
+inline float Bacterie::A() const{
+  return A_ ;
+}
+
+inline float Bacterie::B() const{
+  return B_ ;
+}
+
+inline float Bacterie::C() const{
+  return C_ ;
+}
+
+inline float Bacterie::w() const{
+  return w_ ;
+}
+
+inline bool Bacterie::div() const{
+  return div_ ;
+}
 // ===========================================================================
 //                            Setters' definitions
 // ===========================================================================
