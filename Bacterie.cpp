@@ -89,7 +89,7 @@ void Bacterie::mutation(){
 void Bacterie::fitness(){
   if(G_=='A'){
     w_ = B_ ;
-  } else {
+  } else { //mettre une condition G_ == 'B' ?
     w_ = C_ ;
   }
   if(w_ < WMIN){
@@ -97,6 +97,25 @@ void Bacterie::fitness(){
   }
 }
 
+/* calcul des nouvelles concentrations internes et externes (passées
+ * par référence), changement de la fitness
+ */
+void Bacterie::metabolisme(float& Aout, float& Bout){
+  if (G_ == 'A'){
+    for(int i=0 ; i<10 ; i++){
+      B_ = B_ + A_ * RAB * 0.1 ;
+      A_ = A_ + (Aout * RAA - A_ * RAB) * 0.1 ;
+      Aout = Aout - Aout * RAA * 0.1 ;
+    }
+  } else {
+    for(int i=0 ; i<10 ; i++){
+      C_ = C_ + B_ * RBC * 0.1 ;
+      B_ = B_ + (Bout * RBB - B_ * RBC) * 0.1 ;
+      Bout = Bout - Bout * RBB * 0.1 ;
+    }
+  }
+  fitness() ;
+}
 
 // ===========================================================================
 //                              Protected Methods

@@ -57,6 +57,7 @@ class Bacterie{
   bool death() ;
   void mutation() ;
   void fitness();
+  void metabolisme(float& Aout, float& Bout);
 	
 	protected :
   // =========================================================================
