@@ -58,8 +58,32 @@ Bacterie::Bacterie(int x, int y, char G){
 // ===========================================================================
 //                               Public Methods
 // ===========================================================================
+/* fait mourir la bactérie selon le résultat du tirage et retourne 
+ * un booléen qui signale si la bactérie est morte ou non
+ */
+bool Bacterie::death(){
+  bool dead = false ;
+  float p = (float) rand()/(RAND_MAX+1.0) ;
+  if(p <= Pdeath){
+    dead = true ;
+  }
+  return dead ;
+}
 
- 
+/* fait muter la bactérie selon le résultat du tirage et change la 
+ * fitness si nécessaire
+ */
+/*void Bacterie::mutation(){
+  float p = (float) rand()/(RAND_MAX+1.0) ;
+  if (p <= Pmut){
+    if(G_ == 'A'){
+      G_ = 'B' ;
+    } else {
+      G_ = 'A' ;
+    }
+    fitness();
+  }
+}*/
 
 
 // ===========================================================================
