@@ -15,5 +15,6 @@ int main(){
   //std :: cout << r << std :: endl ;
   b2.set_div(true);
   bool d = b2.death() ;
+  b2.mutation() ;
   return 0 ;
 }

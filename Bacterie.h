@@ -55,8 +55,8 @@ class Bacterie{
   //                              Public Methods
   // =========================================================================
   bool death() ;
-  //void mutation() ;
-  //void fitness();
+  void mutation() ;
+  void fitness();
 	
 	protected :
   // =========================================================================

@@ -73,7 +73,7 @@ bool Bacterie::death(){
 /* fait muter la bactérie selon le résultat du tirage et change la 
  * fitness si nécessaire
  */
-/*void Bacterie::mutation(){
+void Bacterie::mutation(){
   float p = (float) rand()/(RAND_MAX+1.0) ;
   if (p <= Pmut){
     if(G_ == 'A'){
@@ -83,7 +83,19 @@ bool Bacterie::death(){
     }
     fitness();
   }
-}*/
+}
+
+// calcul de la fitness et changement de la fitness
+void Bacterie::fitness(){
+  if(G_=='A'){
+    w_ = B_ ;
+  } else {
+    w_ = C_ ;
+  }
+  if(w_ < WMIN){
+    w_ = 0 ;
+  }
+}
 
 
 // ===========================================================================
