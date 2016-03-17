@@ -59,7 +59,21 @@ class Case{
 // ===========================================================================
 //                            Getters' definitions
 // ===========================================================================
+inline float Case::A() const{
+  return A_ ;
+}
 
+inline float Case::B() const{
+  return B_ ;
+}
+
+inline float Case::C() const{
+  return C_ ;
+}
+
+inline Bacterie* Case::bact() const{
+  return bact_ ;
+}
 // ===========================================================================
 //                            Setters' definitions
 // ===========================================================================
