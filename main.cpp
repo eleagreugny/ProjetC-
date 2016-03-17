@@ -1,6 +1,7 @@
 #include "Bacterie.h"
 #include "Environnement.h"
 #include "Simulation.h"
+#include "Case.h"
 #include <iostream>
 #include <ctime>
 #include <cstdlib>
