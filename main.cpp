@@ -9,6 +9,8 @@
 int main(){
   
   srand(time(0)) ;
+
+  /*
   Bacterie b1 ;
   Bacterie b2(2,3,'A') ;
   std :: cout << b2.G() << std :: endl ;
@@ -16,6 +18,8 @@ int main(){
   Bacterie b3(1,1,'B') ;
   std :: cout << b3.G() << std :: endl ;
   std :: cout << b3.A()<<" "<< b3.B()<<" "<< b3.C() << std :: endl ;
+  */
+  
   /*float Aout = 5.0 ;
   float Bout = 5.0 ;
   b2.metabolisme(Aout,Bout) ;
@@ -31,7 +35,8 @@ int main(){
   //b2.set_div(true);
   //bool d = b2.death() ;
   //b2.mutation() ;
-  Case C1 ;
+  
+  /*Case C1 ;
   std :: cout << C1.is_empty() << std :: endl ;
   Case C2(3.0, 2,4,'A') ;
   std :: cout << C2.is_empty() << std :: endl ;
@@ -39,7 +44,10 @@ int main(){
   C2.metabolisme_bact();
   std :: cout << C2.A() << std :: endl ;
   std :: cout << b2.A()<<" "<<b2.B()<<" "<< b2.C() << std :: endl ;
-
+  */
+  
+  Environnement E;
+  Environnement E2(5.0, 4,6, 0.1) ;
   
   return 0 ;
 }
