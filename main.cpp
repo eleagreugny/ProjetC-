@@ -30,5 +30,13 @@ int main(){
   //b2.set_div(true);
   //bool d = b2.death() ;
   //b2.mutation() ;
+  Case C1 ;
+  std :: cout << C1.is_empty() << std :: endl ;
+  Case C2(3.0, &b2) ;
+  std :: cout << C2.is_empty() << std :: endl ;
+  std :: cout << C2.A() << std :: endl ;
+  C2.reset(10) ;
+  std :: cout << C2.A() << std :: endl ;
+  
   return 0 ;
 }

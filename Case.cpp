@@ -42,6 +42,14 @@ void Case::reset(float Ainit){
   B_ = 0 ;
   C_ = 0 ;
 }
+
+bool Case::is_empty(){
+  bool empty = false ;
+  if (bact_ == nullptr){
+    empty = true ;
+  }
+  return empty ;
+}
 // ===========================================================================
 //                              Protected Methods
 // ===========================================================================
