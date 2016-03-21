@@ -33,7 +33,7 @@ int main(){
   //b2.mutation() ;
   Case C1 ;
   std :: cout << C1.is_empty() << std :: endl ;
-  Case C2(3.0, &b2) ;
+  Case C2(3.0, 2,4,'A') ;
   std :: cout << C2.is_empty() << std :: endl ;
   std :: cout << C2.A() << std :: endl ;
   C2.metabolisme_bact();

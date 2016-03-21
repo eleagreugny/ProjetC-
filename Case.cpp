@@ -24,16 +24,25 @@ Case::Case(const Case& model){
   bact_ = model.bact_ ;
 }
 
-Case::Case(float Ainit,Bacterie* b){
+Case::Case(float Ainit){
   A_ = Ainit ;
   B_ = 0 ;
   C_ = 0 ;
-  bact_ = b ;
+  bact_ = nullptr ;
+}
+
+Case::Case(float Ainit,char G,int x, int y){
+  A_ = Ainit ;
+  B_ = 0 ;
+  C_ = 0 ;
+  bact_ = new Bacterie(x,y,G) ;
 }
 // ===========================================================================
 //                                 Destructor
 // ===========================================================================
-
+Case::~Case(){
+  delete bact_ ;
+}
 // ===========================================================================
 //                               Public Methods
 // ===========================================================================
@@ -53,6 +62,11 @@ bool Case::is_empty(){
 
 void Case::metabolisme_bact(){
   (*bact_).metabolisme(A_,B_) ;
+}
+
+void Case::set_bact(int x, int y, char G){
+  delete bact_ ;
+  bact_ = new Bacterie(x,y,G) ;
 }
 // ===========================================================================
 //                              Protected Methods
