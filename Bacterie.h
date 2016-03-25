@@ -1,6 +1,7 @@
 
 #ifndef BACTERIE_H_
 #define BACTERIE_H_
+#include <iostream>
 #include <cstdlib>
 // ===========================================================================
 //                                  Includes

@@ -47,7 +47,8 @@ int main(){
   */
   
   Environnement E;
-  Environnement E2(5.0, 4,6, 0.1) ;
+  Environnement E2(5.0, 3,3, 0.1) ;
+  E2.diffusion() ;
   
   return 0 ;
 }

@@ -1,6 +1,7 @@
 
 #ifndef ENVIRONNEMENT_H_
 #define ENVIRONNEMENT_H_
+#include <iostream>
 #include <cstdlib>
 #include "Case.h"
 // ===========================================================================

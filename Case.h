@@ -1,6 +1,7 @@
 
 #ifndef CASE_H_
 #define CASE_H_
+#include <iostream>
 #include <cstdlib>
 #include "Bacterie.h"
 // ===========================================================================
