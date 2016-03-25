@@ -77,13 +77,11 @@ Environnement::~Environnement(){
   for(int i =0 ; i<H_ ; i++){
     for(int j=0 ; j<W_ ; j++){
       delete grille_[i][j] ;
-      grille_[i][j] = nullptr ;
     }
 		delete[] grille_[i] ;
-    grille_[i] = nullptr ;
 	}
 	delete[] grille_ ; //supprime les Cases
-  grille_ = nullptr ;
+
 }
 // ===========================================================================
 //                               Public Methods
@@ -144,7 +142,6 @@ void Environnement::diffusion(){
 		delete[] Oldgrille[i] ;
 	}
 	delete[] Oldgrille ;
-  std::cout << "coucou" << std::endl;
 }
 
 

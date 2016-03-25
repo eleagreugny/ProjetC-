@@ -21,7 +21,7 @@ Case::Case(const Case& model){
   A_ = model.A_ ;
   B_ = model.B_ ;
   C_ = model.C_ ;
-  bact_ = model.bact_ ;
+  bact_ = new Bacterie(*(model.bact_));
 }
 
 Case::Case(float Ainit){
@@ -42,7 +42,6 @@ Case::Case(float Ainit,char G,int x, int y){
 // ===========================================================================
 Case::~Case(){
   delete bact_ ;
-  bact_ = nullptr ;
 }
 // ===========================================================================
 //                               Public Methods
