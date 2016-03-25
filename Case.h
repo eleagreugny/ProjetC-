@@ -36,6 +36,9 @@ class Case{
   //                                  Setters
   // =========================================================================
   void set_bact(int x, int y, char G);
+  inline void set_A(float a) ;
+  inline void set_B(float b) ;
+  inline void set_C(float c) ;
   // =========================================================================
   //                                 Operators
   // =========================================================================
@@ -78,6 +81,17 @@ inline Bacterie* Case::bact() const{
   return bact_ ;
 }
 
+inline void Case::set_A(float a) {
+  A_ = a ;
+}
+
+inline void Case::set_B(float b) {
+  B_ = b ;
+}
+
+inline void Case::set_C(float c) {
+  C_ = c ;
+}
 
 // ===========================================================================
 //                            Setters' definitions
