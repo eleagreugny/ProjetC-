@@ -18,7 +18,7 @@ Simulation::Simulation(){
 
 Simulation::Simulation(const Simulation& model){
   T_ = model.T_ ;
-  envir_ = new Environnement(*(model.envir_))
+  envir_ = new Environnement(*(model.envir_)) ;
 }
 
 Simulation::Simulation(int T,float Ainit, int H, int W, float D){
