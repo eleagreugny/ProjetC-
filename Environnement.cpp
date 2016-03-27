@@ -24,7 +24,15 @@ Environnement::Environnement(const Environnement& model){
   H_ = model.H_ ;
   W_ = model.W_ ;
   D_ = model.D_ ;
-  grille_ = model.grille_ ;
+  grille_ = new Case**[H_] ;
+  for (int i=0 ; i<H_ ; i++){
+    grille_[i] = new Case*[W_] ;
+  }
+  for(int x=0 ; x<H_ ; x++){
+    for(int y=0 ; y<W_ ; y++){
+      grille_[x][y]= new Case(*(model.grille_[x][y])) ;
+    }
+  }
 }
 
 Environnement::Environnement(float Ainit,int H, int W, float D){
@@ -41,11 +49,11 @@ Environnement::Environnement(float Ainit,int H, int W, float D){
       grille_[x][y]= new Case(Ainit_) ;
     }
   }
-  
+
   int N = H_ * W_ ; //nb total de bacteries
   int nA = N/2 ; //nb de bacteries A restant à créer
   int nB = N/2 ; //nb de bacteries B restant à créer
-  
+
   for(int x=0 ; x<H_ ; x++){
     for(int y=0 ; y<W_ ; y++){
       if(nA*nB != 0){
@@ -55,7 +63,7 @@ Environnement::Environnement(float Ainit,int H, int W, float D){
           nA--;
         } else {
           (grille_[x][y])->set_bact(x,y,'B');
-          nB--;          
+          nB--;
         }
       } else {
         if(nA != 0){
@@ -68,7 +76,7 @@ Environnement::Environnement(float Ainit,int H, int W, float D){
       }
     }
   }
-  
+
 }
 // ===========================================================================
 //                                 Destructor
@@ -100,7 +108,7 @@ void Environnement::diffusion(){
   }
   for(int x=0 ; x<H_ ; x++){
     for(int y=0 ; y<W_ ; y++){
-      
+
       for(int i=-1 ; i<= 1 ; i++){
         for(int j=-1 ; j<=1 ; j++){
           int xf = x + i ;
@@ -123,7 +131,7 @@ void Environnement::diffusion(){
           grille_[x][y]->set_C(grille_[x][y]->C()+D_*Oldgrille[xf][yf]->C());
         }
       }
-      
+
     }
   }
 
@@ -134,7 +142,7 @@ void Environnement::diffusion(){
       grille_[x][y]->set_C(grille_[x][y]->C()-9*D_*Oldgrille[x][y]->C());
     }
   }
-  
+
   for(int i =0 ; i<H_ ; i++){
     for(int j=0 ; j<W_ ; j++){
       delete Oldgrille[i][j] ;

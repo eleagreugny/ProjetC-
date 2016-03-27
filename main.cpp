@@ -7,7 +7,7 @@
 #include <cstdlib>
 
 int main(){
-  
+
   srand(time(0)) ;
 
   /*
@@ -19,7 +19,7 @@ int main(){
   std :: cout << b3.G() << std :: endl ;
   std :: cout << b3.A()<<" "<< b3.B()<<" "<< b3.C() << std :: endl ;
   */
-  
+
   /*float Aout = 5.0 ;
   float Bout = 5.0 ;
   b2.metabolisme(Aout,Bout) ;
@@ -29,13 +29,13 @@ int main(){
   std :: cout << b3.A() <<" "<< b3.B() <<" "<< b3.C() << std :: endl ;
   std :: cout << Aout <<" "<< Bout << std :: endl ;
   */
-  
+
   //float r = (float) rand()/(RAND_MAX+1.0) ;
   //std :: cout << r << std :: endl ;
   //b2.set_div(true);
   //bool d = b2.death() ;
   //b2.mutation() ;
-  
+
   /*Case C1 ;
   std :: cout << C1.is_empty() << std :: endl ;
   Case C2(3.0, 2,4,'A') ;
@@ -45,10 +45,10 @@ int main(){
   std :: cout << C2.A() << std :: endl ;
   std :: cout << b2.A()<<" "<<b2.B()<<" "<< b2.C() << std :: endl ;
   */
-  
+
   Environnement E;
   Environnement E2(5.0, 3,3, 0.1) ;
   E2.diffusion() ;
-  
+
   return 0 ;
 }
