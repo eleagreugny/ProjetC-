@@ -152,6 +152,16 @@ void Environnement::diffusion(){
 	delete[] Oldgrille ;
 }
 
+void Environnement::death_G(){
+  for(int x=0 ; x<H_ ; x++){
+    for(int y=0 ; y<W_ ; y++){
+      if(!(grille_[x][y]->is_empty())){
+        grille_[x][y]->kill();
+      }
+    }
+  }
+}
+
 
 // ===========================================================================
 //                              Protected Methods

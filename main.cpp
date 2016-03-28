@@ -49,6 +49,7 @@ int main(){
   Environnement E;
   Environnement E2(5.0, 3,3, 0.1) ;
   E2.diffusion() ;
+  E2.death_G() ;
 
   return 0 ;
 }

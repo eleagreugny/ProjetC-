@@ -38,7 +38,6 @@ class Simulation{
   // =========================================================================
   //                              Public Methods
   // =========================================================================
-  void kill();
   void competition();
   void division();
   void developpement();
