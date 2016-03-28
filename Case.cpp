@@ -68,6 +68,17 @@ void Case::set_bact(int x, int y, char G){
   delete bact_ ;
   bact_ = new Bacterie(x,y,G) ;
 }
+
+void Case::kill(){
+  bool dead = bact_->death();
+  if(dead){
+    A_ = A_ + bact_->A() ;
+    B_ = B_ + bact_->B() ;
+    C_ = C_ + bact_->C() ;
+    delete bact_ ;
+    bact_ = nullptr ;
+  }
+}
 // ===========================================================================
 //                              Protected Methods
 // ===========================================================================
