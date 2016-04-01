@@ -2,7 +2,6 @@
 //                                  Includes
 // ===========================================================================
 #include "Environnement.h"
-#include <iostream>
 
 // ===========================================================================
 //                       Definition of static attributes
@@ -160,6 +159,103 @@ void Environnement::death_G(){
       }
     }
   }
+}
+
+void Environnement::division(){
+  std::list<int> gap ;
+
+  for(int x=0 ; x<H_ ; x++){
+    for(int y=0 ; y<W_ ; y++){
+      if(grille_[x][y]->is_empty()){
+        gap.push_front(x * W_ + y) ;
+        /* ici on transforme les coordonnées 2D en 1D pour pouvoir
+         * les stocker simplement dans la liste.
+         */
+      }
+    }
+  }
+  
+  std::shuffle(gap.begin() , gap.end()) ;
+  
+  while(!(gap.empty())){
+    //on récupère les coordonnées 2D du gap
+    int c = gap.pop_front();
+    int x = c/W_ ;
+    int y = c%W_ ;
+    float wmax = Bacterie::WMIN ;
+    /* plus grande fitness dans le voisinage du gap
+     * en l'initialisant à WMIN, permet que les bact avec une fitness 
+     * inférieure ne se divisent pas.
+     */
+    std::list<Case*> winners ;
+    /*liste de la ou des cases possédant la bactérie avec
+     * la plus grande fitness.
+     */
+     for(int i=-1 ; i<= 1 ; i++){
+        for(int j=-1 ; j<=1 ; j++){
+          if(i!=0 && j!=0){
+            int xf = x + i ;
+            int yf = y + j ;
+            //conditions thoriques
+            if(xf >= H_){
+              xf = 0 ;
+            }
+            if(xf < 0){
+              xf = H_ -1 ;
+            }
+            if(yf >= W_){
+              yf = 0 ;
+            }
+            if(yf < 0){
+              yf = W_ -1 ;
+            }
+            if(grille_[xf][yf].bact_->w() >= wmax){
+              if(!(grille_[xf][yf].bact_->div())){
+                winners.push_front(grille_[xf][yf]) ;
+                wmax = grille_[xf][yf].bact_->w() ;
+              }
+            }
+          }
+        }
+      }
+      
+      if(!(winners.empty())){
+        std::shuffle(winners.begin() , winners.end());
+        Case* Boss = winners.pop_front() ;
+        //ajout de la bactérie fille au niveau du gap
+        grille_[x][y]->set_bact(x,y,Boss.bact_->G());
+        /*on set les concentrations de la fille sur la moitié
+         * des concentrations de la mère.
+         */ 
+        grille_[x][y].bact_->set_A(Boss.bact_->A()/2);
+        grille_[x][y].bact_->set_B(Boss.bact_->B()/2);
+        grille_[x][y].bact_->set_C(Boss.bact_->C()/2);
+        /* on diminue de moitié les concentrations de la mère
+         */
+        Boss.bact_->set_A(Boss.bact_->A() /2) ;
+        Boss.bact_->set_B(Boss.bact_->B() /2) ;
+        Boss.bact_->set_C(Boss.bact_->C() /2) ;
+        
+        //on fait muter les deux cellules filles
+        grille_[x][y].bact_->mutation() ;
+        Boss.bact_->mutation() ;
+        
+        //on met les booléens div des bactéries à true
+        grille_[x][y].bact_->set_div(true);
+        Boss.bact_->set_div(true) ;
+      }
+  }
+  
+  //on remet les booléens div de toutes les bactéries à false
+  for(int x=0 ; x<H_ ; x++){
+    for(int y=0 ; y<W_ ; y++){
+      if(!(grille_[x][y]->is_empty())){
+        grille_[x][y].bact_->set_div(false);
+      }
+    }
+  }
+  
+   
 }
 
 
