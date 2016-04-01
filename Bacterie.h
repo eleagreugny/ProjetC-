@@ -48,6 +48,9 @@ class Bacterie{
   //                                  Setters
   // =========================================================================
   inline void set_div(bool d);
+  inline void set_A(float a);
+  inline void set_B(float b);
+  inline void set_C(float c);
   // =========================================================================
   //                                 Operators
   // =========================================================================
@@ -122,6 +125,18 @@ inline bool Bacterie::div() const{
 // ===========================================================================
 inline void Bacterie::set_div(bool d){
   div_ = d ;
+}
+
+inline void Bacterie::set_A(float a){
+  A_ = a ;
+}
+
+inline void Bacterie::set_B(float b){
+  B_ = b ;
+}
+
+inline void Bacterie::set_C(float c){
+  C_ = c ;
 }
 // ===========================================================================
 //                           Operators' definitions
