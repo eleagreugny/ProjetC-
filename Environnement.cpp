@@ -278,6 +278,28 @@ void Environnement::changement_milieu() {
   }
 }
 
+/* stocke dans un fichier l'etat de l'environnement :
+ * 0 si mort , 1 si A, 2 si B
+ */
+void Environnement::etat_milieu(){
+  std::ofstream f("simulation.txt", std::ios::out | std::ios::app) ;
+  for(int x=0 ; x<H_ ; x++){
+    for(int y=0 ; y<W_ ; y++){
+      f << x << " " << y ;
+      if(grille_[x][y]->is_empty()){
+        f << 0 << std::endl ;
+      } else {
+        if(grille_[x][y]->bact()->G() == 'A'){
+          f << 1 << std::endl ;
+        } else {
+          f << 2 << std::endl ;
+        }
+      }
+    }
+  }
+  f.close() ; 
+}
+
 
 // ===========================================================================
 //                              Protected Methods

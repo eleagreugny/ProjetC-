@@ -6,6 +6,7 @@
 #include <list>
 #include <vector>
 #include <algorithm>
+#include <fstream>
 #include "Case.h"
 // ===========================================================================
 //                                  Includes
@@ -47,6 +48,7 @@ class Environnement{
   void division() ;
   void developpement() ;
   void changement_milieu() ;
+  void etat_milieu() ;
 
 	protected :
   // =========================================================================
