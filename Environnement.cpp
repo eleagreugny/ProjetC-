@@ -188,9 +188,10 @@ void Environnement::division(){
      * en l'initialisant à WMIN, permet que les bact avec une fitness 
      * inférieure ne se divisent pas.
      */
-    std::vector<Case*> winners ;
+    std::vector<int> winners ;
     /*liste de la ou des cases possédant la bactérie avec
      * la plus grande fitness.
+     * même transfortmation des coordonnées que précédemment
      */
      for(int i=-1 ; i<= 1 ; i++){
         for(int j=-1 ; j<=1 ; j++){
@@ -210,10 +211,12 @@ void Environnement::division(){
             if(yf < 0){
               yf = W_ -1 ;
             }
-            if((grille_[xf][yf]->bact())->w() >= wmax){
-              if(!((grille_[xf][yf]->bact())->div())){
-                winners.push_back(grille_[xf][yf]) ;
-                wmax = (grille_[xf][yf]->bact())->w() ;
+            if(!(grille_[xf][yf]->is_empty())){
+              if((grille_[xf][yf]->bact())->w() >= wmax){
+                if(!((grille_[xf][yf]->bact())->div())){
+                  winners.push_back(xf * W_ + yf) ;
+                  wmax = (grille_[xf][yf]->bact())->w() ;
+                }
               }
             }
           }
@@ -222,7 +225,10 @@ void Environnement::division(){
       
       if(!(winners.empty())){
         random_shuffle(winners.begin() , winners.end());
-        Case* Boss = winners.front() ;
+        int d = winners.front() ;
+        int xW = d/W_ ;
+        int yW = d%W_ ;
+        Case* Boss = grille_[xW][yW] ;
         //ajout de la bactérie fille au niveau du gap
         grille_[x][y]->set_bact(x,y,Boss->bact()->G());
         /*on set les concentrations de la fille sur la moitié
@@ -263,7 +269,7 @@ void Environnement::division(){
 void Environnement::developpement(){
   for(int x=0 ; x<H_ ; x++){
     for(int y=0 ; y<W_ ; y++){
-      if(grille_[x][y]->is_empty()){
+      if(!(grille_[x][y]->is_empty())){
         grille_[x][y]->metabolisme_bact() ;
       }
     }
@@ -282,10 +288,10 @@ void Environnement::changement_milieu() {
  * 0 si mort , 1 si A, 2 si B
  */
 void Environnement::etat_milieu(){
-  std::ofstream f("simulation.txt", std::ios::out | std::ios::app) ;
+  std::ofstream f("simulation.txt", std::ios::out | std::ios::trunc) ;
   for(int x=0 ; x<H_ ; x++){
     for(int y=0 ; y<W_ ; y++){
-      f << x << " " << y ;
+      f << x << " " << y << " ";
       if(grille_[x][y]->is_empty()){
         f << 0 << std::endl ;
       } else {

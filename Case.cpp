@@ -21,7 +21,11 @@ Case::Case(const Case& model){
   A_ = model.A_ ;
   B_ = model.B_ ;
   C_ = model.C_ ;
-  bact_ = new Bacterie(*(model.bact_));
+  if (model.bact_ != nullptr){
+    bact_ = new Bacterie(*(model.bact_));
+  } else {
+    bact_ = nullptr ;
+  }
 }
 
 Case::Case(float Ainit){
@@ -61,7 +65,9 @@ bool Case::is_empty(){
 }
 
 void Case::metabolisme_bact(){
-  (*bact_).metabolisme(A_,B_) ;
+  if(bact_ != nullptr){
+    (*bact_).metabolisme(A_,B_) ;
+  }
 }
 
 void Case::set_bact(int x, int y, char G){

@@ -47,6 +47,7 @@ void Simulation::run(){
     envir_ -> division() ;
     envir_ -> developpement() ;
   }
+  envir_->etat_milieu() ;
 }
 
 // ===========================================================================
