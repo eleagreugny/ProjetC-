@@ -36,8 +36,11 @@ Simulation::~Simulation(){
 //                               Public Methods
 // ===========================================================================
 
-//enchainement des étapes
-void Simulation::run(){
+/* enchainement des étapes
+ * renvoie 1 si extinction, 2 si cohabitation
+ * 3 si exclusion.
+ */
+int Simulation::run(){
   for(int i=0 ; i<10000 ; i++){
     if(i%T_ == 0){
       envir_-> changement_milieu() ;
@@ -47,7 +50,8 @@ void Simulation::run(){
     envir_ -> division() ;
     envir_ -> developpement() ;
   }
-  envir_->etat_milieu() ;
+  int r = envir_->etat_milieu() ;
+  return r ;
 }
 
 // ===========================================================================

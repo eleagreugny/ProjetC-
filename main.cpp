@@ -53,7 +53,7 @@ int main(){
   E2.division() ;
   E2.developpement() ;
   */
-  Simulation S1(100,5.0,10,5,0.1);
-  S1.run();
+  Simulation S1(100,20,32,32,0.1);
+  int R = S1.run();
   return 0 ;
 }

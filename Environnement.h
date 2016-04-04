@@ -48,7 +48,7 @@ class Environnement{
   void division() ;
   void developpement() ;
   void changement_milieu() ;
-  void etat_milieu() ;
+  int etat_milieu() ;
 
 	protected :
   // =========================================================================

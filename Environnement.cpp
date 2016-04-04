@@ -139,8 +139,19 @@ void Environnement::diffusion(){
       grille_[x][y]->set_A(grille_[x][y]->A()-9*D_*Oldgrille[x][y]->A());
       grille_[x][y]->set_B(grille_[x][y]->B()-9*D_*Oldgrille[x][y]->B());
       grille_[x][y]->set_C(grille_[x][y]->C()-9*D_*Oldgrille[x][y]->C());
+  
+      if(grille_[x][y]->A() < 0){
+      grille_[x][y]->set_A(0) ;
+      }
+      if(grille_[x][y]->B() < 0){
+      grille_[x][y]->set_B(0) ;
+      }
+      if(grille_[x][y]->C() < 0){
+      grille_[x][y]->set_C(0) ;
+      }
     }
   }
+
 
   for(int i =0 ; i<H_ ; i++){
     for(int j=0 ; j<W_ ; j++){
@@ -286,9 +297,14 @@ void Environnement::changement_milieu() {
 
 /* stocke dans un fichier l'etat de l'environnement :
  * 0 si mort , 1 si A, 2 si B
+ * renvoie 1 si extinction, 2 si cohabitation
+ * 3 si exclusion.
  */
-void Environnement::etat_milieu(){
+int Environnement::etat_milieu(){
   std::ofstream f("simulation.txt", std::ios::out | std::ios::trunc) ;
+  int nA = 0 ;
+  int nB = 0 ;
+  int r ;
   for(int x=0 ; x<H_ ; x++){
     for(int y=0 ; y<W_ ; y++){
       f << x << " " << y << " ";
@@ -297,13 +313,25 @@ void Environnement::etat_milieu(){
       } else {
         if(grille_[x][y]->bact()->G() == 'A'){
           f << 1 << std::endl ;
+          nA ++ ;
         } else {
           f << 2 << std::endl ;
+          nB ++ ;
         }
       }
     }
   }
-  f.close() ; 
+  f.close() ;
+  if(nA == 0 && nB == 0){
+    r = 1 ; //exctinction
+  } else {
+    if(nB == 0){
+      r = 3 ; //exclusion
+    } else {
+      r = 2 ; //cohabitation
+    }
+  }
+  return r ;
 }
 
 
