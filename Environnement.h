@@ -45,6 +45,7 @@ class Environnement{
   void diffusion() ;
   void death_G() ;
   void division() ;
+  void developpement() ;
 
 	protected :
   // =========================================================================
