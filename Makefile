@@ -9,13 +9,13 @@ main.o : main.cpp Bacterie.h Environnement.h Simulation.h Case.h
 Bacterie.o : Bacterie.h Bacterie.cpp
 	g++ -c Bacterie.cpp -o Bacterie.o -g -pg --std=c++11
 
-Environnement.o : Environnement.h Environnement.cpp
+Environnement.o : Environnement.h Environnement.cpp Case.h
 	g++ -c Environnement.cpp -o Environnement.o -g -pg --std=c++11
 	
-Simulation.o : Simulation.h Simulation.cpp
+Simulation.o : Simulation.h Simulation.cpp Environnement.h
 	g++ -c Simulation.cpp -o Simulation.o -g -pg --std=c++11
 	
-Case.o : Case.h Case.cpp
+Case.o : Case.h Case.cpp Bacterie.h
 	g++ -c Case.cpp -o Case.o -g -pg --std=c++11
 
 clean :

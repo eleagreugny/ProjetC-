@@ -10,6 +10,7 @@
 class Case{
 	public :
     friend void Bacterie::metabolisme(float& Aout, float& Bout);
+    //friend void Environnement::division() ;
    // =========================================================================
   //                               Attribut classe
   // =========================================================================

@@ -3,6 +3,9 @@
 #define ENVIRONNEMENT_H_
 #include <iostream>
 #include <cstdlib>
+#include <list>
+#include <vector>
+#include <algorithm>
 #include "Case.h"
 // ===========================================================================
 //                                  Includes

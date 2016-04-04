@@ -50,6 +50,8 @@ int main(){
   Environnement E2(5.0, 3,3, 0.1) ;
   E2.diffusion() ;
   E2.death_G() ;
+  E2.division() ;
+  
 
   return 0 ;
 }
