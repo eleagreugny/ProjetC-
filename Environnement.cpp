@@ -259,6 +259,25 @@ void Environnement::division(){
    
 }
 
+//fait métaboliser toutes les bactéries vivantes
+void Environnement::developpement(){
+  for(int x=0 ; x<H_ ; x++){
+    for(int y=0 ; y<W_ ; y++){
+      if(grille_[x][y]->is_empty()){
+        grille_[x][y]->metabolisme_bact() ;
+      }
+    }
+  }
+}
+
+void Environnement::changement_milieu() {
+  for(int x=0 ; x<H_ ; x++){
+    for(int y=0 ; y<W_ ; y++){
+      grille_[x][y]->reset(Ainit_) ;
+    }
+  }
+}
+
 
 // ===========================================================================
 //                              Protected Methods
