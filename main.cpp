@@ -48,10 +48,11 @@ int main(){
 
   Environnement E;
   Environnement E2(5.0, 3,3, 0.1) ;
-  E2.diffusion() ;
+  /*E2.diffusion() ;
   E2.death_G() ;
   E2.division() ;
-  
-
+  E2.developpement() ;
+  */
+  Simulation S1(100,5.0,10,5,0.1);
   return 0 ;
 }

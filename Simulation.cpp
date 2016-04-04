@@ -36,6 +36,18 @@ Simulation::~Simulation(){
 //                               Public Methods
 // ===========================================================================
 
+//enchainement des étapes
+void Simulation::run(){
+  for(int i=0 ; i<10000 ; i++){
+    if(i%T_ == 0){
+      envir_-> changement_milieu() ;
+    }
+    envir_ -> diffusion() ;
+    envir_ -> death_G() ;
+    envir_ -> division() ;
+    envir_ -> developpement() ;
+  }
+}
 
 // ===========================================================================
 //                              Protected Methods
