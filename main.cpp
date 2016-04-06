@@ -5,7 +5,25 @@
 #include <iostream>
 #include <ctime>
 #include <cstdlib>
+#include <fstream>
 
+
+void passage(float Amin,float Amax,float Astep,int Tmin,int Tmax,int Tstep){
+  std::ofstream f("diagramme.txt", std::ios::out | std::ios::trunc) ;
+  float A;
+  float T = Tmin ;
+  while(T <= Tmax){
+    A = Amin ;
+    while(A <= Amax){
+      Simulation S(T,A,32,32,0.1) ;
+      int R = S.run();
+      f << T << " "<< A <<" "<< R << std::endl ;
+      A += Astep ;
+    }
+    T += Tstep ;
+  }
+}
+  
 int main(){
 
   srand(time(0)) ;
@@ -46,14 +64,17 @@ int main(){
   std :: cout << b2.A()<<" "<<b2.B()<<" "<< b2.C() << std :: endl ;
   */
 
-  Environnement E;
-  Environnement E2(5.0, 3,3, 0.1) ;
+  //Environnement E;
+  //Environnement E2(5.0, 3,3, 0.1) ;
   /*E2.diffusion() ;
   E2.death_G() ;
   E2.division() ;
   E2.developpement() ;
   */
-  Simulation S1(100,20,32,32,0.1);
-  int R = S1.run();
+  //Simulation S1(100,20,32,32,0.1);
+  //int R = S1.run();
+  
+  passage(0.0,50.0,1.0,1,100,1) ;
+  
   return 0 ;
 }

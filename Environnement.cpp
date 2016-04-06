@@ -301,27 +301,27 @@ void Environnement::changement_milieu() {
  * 3 si exclusion.
  */
 int Environnement::etat_milieu(){
-  std::ofstream f("simulation.txt", std::ios::out | std::ios::trunc) ;
+  //std::ofstream f("simulation.txt", std::ios::out | std::ios::trunc) ;
   int nA = 0 ;
   int nB = 0 ;
   int r ;
   for(int x=0 ; x<H_ ; x++){
     for(int y=0 ; y<W_ ; y++){
-      f << x << " " << y << " ";
+      //f << x << " " << y << " ";
       if(grille_[x][y]->is_empty()){
-        f << 0 << std::endl ;
+        //f << 0 << std::endl ;
       } else {
         if(grille_[x][y]->bact()->G() == 'A'){
-          f << 1 << std::endl ;
+          //f << 1 << std::endl ;
           nA ++ ;
         } else {
-          f << 2 << std::endl ;
+          //f << 2 << std::endl ;
           nB ++ ;
         }
       }
     }
   }
-  f.close() ;
+  //f.close() ;
   if(nA == 0 && nB == 0){
     r = 1 ; //exctinction
   } else {
