@@ -9,7 +9,7 @@
 
 
 void passage(float Amin,float Amax,float Astep,int Tmin,int Tmax,int Tstep){
-  std::ofstream f("diagramme.txt", std::ios::out | std::ios::trunc) ;
+  std::ofstream f("mut.txt", std::ios::out | std::ios::trunc) ;
   float A;
   float T = Tmin ;
   while(T <= Tmax){
@@ -23,7 +23,7 @@ void passage(float Amin,float Amax,float Astep,int Tmin,int Tmax,int Tstep){
     T += Tstep ;
   }
 }
-  
+
 int main(){
 
   srand(time(0)) ;
@@ -73,8 +73,8 @@ int main(){
   */
   //Simulation S1(100,20,32,32,0.1);
   //int R = S1.run();
-  
-  passage(0.0,50.0,5.0,1,10,1) ;
-  
+
+  passage(0.0,50.0,5.0,0,1500,50) ;
+
   return 0 ;
 }
