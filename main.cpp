@@ -74,7 +74,7 @@ int main(){
   //Simulation S1(100,20,32,32,0.1);
   //int R = S1.run();
 
-  passage(0.0,50.0,5.0,0,1500,50) ;
+  passage(0.0,50.0,5.0,1,1500,50) ;
 
   return 0 ;
 }
