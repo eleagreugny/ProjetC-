@@ -13,7 +13,7 @@ const float Bacterie::RBB = 0.1 ;
 const float Bacterie::RBC = 0.1 ;
 
 const float Bacterie::Pdeath = 0.02 ;
-const float Bacterie::Pmut = 0 ;
+const float Bacterie::Pmut = 0.001 ;
 
 const float Bacterie::WMIN = 0.001 ;
 // ===========================================================================
@@ -38,7 +38,7 @@ Bacterie::Bacterie(const Bacterie& model){
   B_ = model.B_ ;
   C_ = model.C_ ;
   w_ = model.w_ ;
-  div_ = model.div_ ;  
+  div_ = model.div_ ;
 }
 
 Bacterie::Bacterie(int x, int y, char G){
@@ -58,7 +58,7 @@ Bacterie::Bacterie(int x, int y, char G){
 // ===========================================================================
 //                               Public Methods
 // ===========================================================================
-/* fait mourir la bactérie selon le résultat du tirage et retourne 
+/* fait mourir la bactérie selon le résultat du tirage et retourne
  * un booléen qui signale si la bactérie est morte ou non
  */
 bool Bacterie::death(){
@@ -70,7 +70,7 @@ bool Bacterie::death(){
   return dead ;
 }
 
-/* fait muter la bactérie selon le résultat du tirage et change la 
+/* fait muter la bactérie selon le résultat du tirage et change la
  * fitness si nécessaire
  */
 void Bacterie::mutation(){
