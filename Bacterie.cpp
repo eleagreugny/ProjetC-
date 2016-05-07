@@ -7,15 +7,17 @@
 // ===========================================================================
 //                       Definition of static attributes
 // ===========================================================================
-const float Bacterie::RAA = 0.1 ;
-const float Bacterie::RAB = 0.1 ;
-const float Bacterie::RBB = 0.1 ;
-const float Bacterie::RBC = 0.1 ;
+float Bacterie::RAA ;
+float Bacterie::RAB ;
+float Bacterie::RBB ;
+float Bacterie::RBC ;
 
-const float Bacterie::Pdeath = 0.02 ;
-const float Bacterie::Pmut = 0.001 ;
+float Bacterie::Pdeath ;
+float Bacterie::Pmut ;
 
-const float Bacterie::WMIN = 0.001 ;
+float Bacterie::WMIN ;
+
+
 // ===========================================================================
 //                                Constructors
 // ===========================================================================

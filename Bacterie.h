@@ -12,17 +12,17 @@ class Bacterie{
   //                               Attribut classe
   // =========================================================================
   //taux d'absorption ou de conversion des molécules
-  static const float RAA ;
-  static const float RAB ;
-  static const float RBB ;
-  static const float RBC ;
+  static float RAA ;
+  static float RAB ;
+  static float RBB ;
+  static float RBC ;
   //probabilités de mort et de mutation
-  static const float Pdeath ;
-  static const float Pmut ;
+  static float Pdeath ;
+  static float Pmut ;
   //fitness minimum
-  static const float WMIN ;
+  static float WMIN ;
 
-  
+
   // =========================================================================
   //                               Constructors
   // =========================================================================
@@ -62,7 +62,7 @@ class Bacterie{
   void mutation() ;
   void fitness();
   void metabolisme(float& Aout, float& Bout);
-	
+
 	protected :
   // =========================================================================
   //                             Protected Methods
@@ -75,7 +75,7 @@ class Bacterie{
   int x_ ;
   int y_ ;
   //génotype, égal à A ou B
-  char G_ ; 
+  char G_ ;
   //concentrations internes
   float A_ ;
   float B_ ;
@@ -84,7 +84,7 @@ class Bacterie{
   float w_ ;
   //booléen pour savoir si la bactérie s'est déjà divisée ou non
   bool div_ ;
-  
+
 };
 // ===========================================================================
 //                            Getters' definitions

@@ -22,6 +22,22 @@ points(diag8$V1,diag8$V2,col=diag8$V3,pch=20,cex=1)
 diag9 = read.table("passage9.txt")
 points(diag9$V1,diag9$V2,col=diag9$V3,pch=20,cex=1)
 
+d = read.table("sansmut.txt")
+plot(d$V1,d$V2,col=d$V3,pch=20,main="Diagramme de phase avec Pmut = 0",xlab="T",ylab="A",cex=1)
+
 #avec Pmut = 0.001
 mut = read.table("mut.txt")
 plot(mut$V1,mut$V2,col=mut$V3,pch=20,main="Diagramme de phase",xlab="T",ylab="A",cex=1)
+
+mut2 = read.table("mut2.txt")
+plot(mut2$V1,mut2$V2,col=mut2$V3,pch=20,main="Diagramme de phase avec Pmut = 0.001",xlab="T",ylab="A",cex=1)
+
+#variation de D
+D0 = read.table("sansmutD0.txt")
+plot(D0$V1,D0$V2,col=D0$V3,pch=20,main="Diagramme de phase avec D = 0",xlab="T",ylab="A",cex=1)
+
+D01 = read.table("sansmutD01.txt")
+plot(D01$V1,D01$V2,col=D01$V3,pch=20,main="Diagramme de phase avec D = 0.01",xlab="T",ylab="A",cex=1)
+
+D05 = read.table("sansmutD05.txt")
+plot(D05$V1,D05$V2,col=D05$V3,pch=20,main="Diagramme de phase avec D = 0.05",xlab="T",ylab="A",cex=1)

@@ -9,19 +9,47 @@
 
 
 void passage(float Amin,float Amax,float Astep,int Tmin,int Tmax,int Tstep){
-  std::ofstream f("mut.txt", std::ios::out | std::ios::trunc) ;
-  float A;
-  float T = Tmin ;
-  while(T <= Tmax){
-    A = Amin ;
-    while(A <= Amax){
-      Simulation S(T,A,32,32,0.1) ;
-      int R = S.run();
+  std::ifstream P("params.txt",std::ios::in) ;
+  float Raa, Rbb, Rab, Rbc, D, Pmut, Pdeath, Wmin ;
+  int W, H ;
+  std::string s ;
+  P>>s>>Raa>>s>>Rbb>>s>>Rab>>s>>Rbc>>s>>Pmut>>s>>W>>s>>H>>s>>D>>s>>Pdeath>>s>>Wmin ;
+  Bacterie::RAA = Raa ;
+  Bacterie::RBB = Rbb ;
+  Bacterie::RAB = Rab ;
+  Bacterie::RBC = Rbc ;
+  Bacterie::Pmut = Pmut ;
+  Bacterie::Pdeath = Pdeath ;
+  Bacterie::WMIN = Wmin ;
+  P.close() ;
+
+  std::ofstream f("sansmutD05.txt", std::ios::out | std::ios::trunc) ;
+  float A = Amin;
+  int T;
+  while(A <= Amax){
+    T = Tmin ;
+    int Rprev = 5 ;
+    int R ;
+    while(T <= Tmax){
+      Simulation S(T,A,H,W,D) ;
+      R = S.run();
       f << T << " "<< A <<" "<< R << std::endl ;
-      A += Astep ;
+      if (Rprev != 5 && R != Rprev){
+        int Tbis = std::max(1,T - 2 * Tstep) ;
+        int Rbis ;
+        while(Tbis <= std::min(T+Tstep,1500)){
+            Simulation Sbis(Tbis,A,H,W,D) ;
+            Rbis = Sbis.run() ;
+            f << Tbis << " "<< A <<" "<< Rbis << std::endl ;
+            Tbis += 10 ;
+        }
+      }
+      Rprev = R ;
+      T += Tstep ;
     }
-    T += Tstep ;
+    A += Astep ;
   }
+  f.close() ;
 }
 
 int main(){
@@ -74,7 +102,7 @@ int main(){
   //Simulation S1(100,20,32,32,0.1);
   //int R = S1.run();
 
-  passage(0.0,50.0,5.0,1,1500,50) ;
+  passage(0.0,50.0,2.0,1,1500,50) ;
 
   return 0 ;
 }
