@@ -49,7 +49,7 @@ int Simulation::run(){
     envir_ -> death_G() ;
     envir_ -> division() ;
     envir_ -> developpement() ;
-    if(envir_ ->etat_milieu() == 1){ //si toutes les bactéries sont mortes
+    if(envir_ ->all_dead()){ //si toutes les bactéries sont mortes
         break ;
     }
   }

@@ -16,6 +16,7 @@ Environnement::Environnement(){
   W_ = 0 ;
   D_ = 0 ;
   grille_ = nullptr ;
+  old_grille_ = nullptr ;
 }
 
 Environnement::Environnement(const Environnement& model){
@@ -24,12 +25,15 @@ Environnement::Environnement(const Environnement& model){
   W_ = model.W_ ;
   D_ = model.D_ ;
   grille_ = new Case**[H_] ;
+  old_grille_ = new Case**[H_] ;
   for (int i=0 ; i<H_ ; i++){
     grille_[i] = new Case*[W_] ;
+    old_grille_[i] = new Case*[W_] ;
   }
   for(int x=0 ; x<H_ ; x++){
     for(int y=0 ; y<W_ ; y++){
       grille_[x][y]= new Case(*(model.grille_[x][y])) ;
+      old_grille_[x][y]= new Case(*(model.old_grille_[x][y])) ;
     }
   }
 }
@@ -40,12 +44,15 @@ Environnement::Environnement(float Ainit,int H, int W, float D){
   W_ = W ;
   D_ = D ;
   grille_ = new Case**[H_];
+  old_grille_ = new Case**[H_] ;
   for (int i=0 ; i<H_ ; i++){
     grille_[i] = new Case*[W_] ;
+    old_grille_[i] = new Case*[W_] ;
   }
   for(int x=0 ; x<H_ ; x++){
     for(int y=0 ; y<W_ ; y++){
       grille_[x][y]= new Case(Ainit_) ;
+      old_grille_[x][y]=new Case() ;
     }
   }
 
@@ -84,10 +91,13 @@ Environnement::~Environnement(){
   for(int i =0 ; i<H_ ; i++){
     for(int j=0 ; j<W_ ; j++){
       delete grille_[i][j] ;
+      delete old_grille_[i][j] ;
     }
 		delete[] grille_[i] ;
+		delete[] old_grille_[i] ;
 	}
 	delete[] grille_ ; //supprime les Cases
+	delete[] old_grille_ ;
 
 }
 // ===========================================================================
@@ -96,13 +106,11 @@ Environnement::~Environnement(){
 
 void Environnement::diffusion(){
   //on crée un nouveau tableau comme copie de l'instant t
-  Case*** Oldgrille = new Case**[H_];
-  for (int i=0 ; i<H_ ; i++){
-    Oldgrille[i] = new Case*[W_] ;
-  }
   for(int x=0 ; x<H_ ; x++){
     for(int y=0 ; y<W_ ; y++){
-      Oldgrille[x][y]= new Case(*(grille_[x][y])) ;
+      old_grille_[x][y]->set_A(grille_[x][y]->A());
+      old_grille_[x][y]->set_B(grille_[x][y]->B());
+      old_grille_[x][y]->set_C(grille_[x][y]->C());
     }
   }
   for(int x=0 ; x<H_ ; x++){
@@ -125,9 +133,9 @@ void Environnement::diffusion(){
           if(yf < 0){
             yf = W_ -1 ;
           }
-          grille_[x][y]->set_A(grille_[x][y]->A()+D_*Oldgrille[xf][yf]->A());
-          grille_[x][y]->set_B(grille_[x][y]->B()+D_*Oldgrille[xf][yf]->B());
-          grille_[x][y]->set_C(grille_[x][y]->C()+D_*Oldgrille[xf][yf]->C());
+          grille_[x][y]->set_A(grille_[x][y]->A()+D_*old_grille_[xf][yf]->A());
+          grille_[x][y]->set_B(grille_[x][y]->B()+D_*old_grille_[xf][yf]->B());
+          grille_[x][y]->set_C(grille_[x][y]->C()+D_*old_grille_[xf][yf]->C());
         }
       }
 
@@ -136,10 +144,10 @@ void Environnement::diffusion(){
 
   for(int x=0 ; x<H_ ; x++){
     for(int y=0 ; y<W_ ; y++){
-      grille_[x][y]->set_A(grille_[x][y]->A()-9*D_*Oldgrille[x][y]->A());
-      grille_[x][y]->set_B(grille_[x][y]->B()-9*D_*Oldgrille[x][y]->B());
-      grille_[x][y]->set_C(grille_[x][y]->C()-9*D_*Oldgrille[x][y]->C());
-  
+      grille_[x][y]->set_A(grille_[x][y]->A()-9*D_*old_grille_[x][y]->A());
+      grille_[x][y]->set_B(grille_[x][y]->B()-9*D_*old_grille_[x][y]->B());
+      grille_[x][y]->set_C(grille_[x][y]->C()-9*D_*old_grille_[x][y]->C());
+
       if(grille_[x][y]->A() < 0){
       grille_[x][y]->set_A(0) ;
       }
@@ -151,15 +159,6 @@ void Environnement::diffusion(){
       }
     }
   }
-
-
-  for(int i =0 ; i<H_ ; i++){
-    for(int j=0 ; j<W_ ; j++){
-      delete Oldgrille[i][j] ;
-    }
-		delete[] Oldgrille[i] ;
-	}
-	delete[] Oldgrille ;
 }
 
 void Environnement::death_G(){
@@ -185,9 +184,9 @@ void Environnement::division(){
       }
     }
   }
-  
+
   random_shuffle(gap.begin() , gap.end()) ;
-  
+
   while(!(gap.empty())){
     //on récupère les coordonnées 2D du gap
     int c = gap.back();
@@ -196,7 +195,7 @@ void Environnement::division(){
     int y = c%W_ ;
     float wmax = Bacterie::WMIN ;
     /* plus grande fitness dans le voisinage du gap
-     * en l'initialisant à WMIN, permet que les bact avec une fitness 
+     * en l'initialisant à WMIN, permet que les bact avec une fitness
      * inférieure ne se divisent pas.
      */
     std::vector<int> winners ;
@@ -233,7 +232,7 @@ void Environnement::division(){
           }
         }
       }
-      
+
       if(!(winners.empty())){
         random_shuffle(winners.begin() , winners.end());
         int d = winners.front() ;
@@ -244,7 +243,7 @@ void Environnement::division(){
         grille_[x][y]->set_bact(x,y,Boss->bact()->G());
         /*on set les concentrations de la fille sur la moitié
          * des concentrations de la mère.
-         */ 
+         */
         (grille_[x][y]->bact())->set_A((Boss->bact())->A()/2);
         (grille_[x][y]->bact())->set_B((Boss->bact())->B()/2);
         (grille_[x][y]->bact())->set_C((Boss->bact())->C()/2);
@@ -253,17 +252,17 @@ void Environnement::division(){
         (Boss->bact())->set_A((Boss->bact())->A() /2) ;
         (Boss->bact())->set_B((Boss->bact())->B() /2) ;
         (Boss->bact())->set_C((Boss->bact())->C() /2) ;
-        
+
         //on fait muter les deux cellules filles
         (grille_[x][y]->bact())->mutation() ;
         (Boss->bact())->mutation() ;
-        
+
         //on met les booléens div des bactéries à true
         (grille_[x][y]->bact())->set_div(true);
         (Boss->bact())->set_div(true) ;
       }
   }
-  
+
   //on remet les booléens div de toutes les bactéries à false
   for(int x=0 ; x<H_ ; x++){
     for(int y=0 ; y<W_ ; y++){
@@ -272,8 +271,8 @@ void Environnement::division(){
       }
     }
   }
-  
-   
+
+
 }
 
 //fait métaboliser toutes les bactéries vivantes
@@ -301,31 +300,36 @@ void Environnement::changement_milieu() {
  * 3 si exclusion.
  */
 int Environnement::etat_milieu(){
+  bool trouveA = false ;
+  bool trouveB = false ;
   //std::ofstream f("simulation.txt", std::ios::out | std::ios::trunc) ;
-  int nA = 0 ;
-  int nB = 0 ;
   int r ;
   for(int x=0 ; x<H_ ; x++){
-    for(int y=0 ; y<W_ ; y++){
+    int y = 0 ;
+    while((!trouveA || !trouveB) && y<W_){
       //f << x << " " << y << " ";
       if(grille_[x][y]->is_empty()){
         //f << 0 << std::endl ;
       } else {
         if(grille_[x][y]->bact()->G() == 'A'){
           //f << 1 << std::endl ;
-          nA ++ ;
+          trouveA = true ;
         } else {
           //f << 2 << std::endl ;
-          nB ++ ;
+          trouveB = true ;
         }
       }
+      y ++ ;
+    }
+    if(trouveA && trouveB){
+        break ;
     }
   }
   //f.close() ;
-  if(nA == 0 && nB == 0){
+  if(!trouveA && !trouveB){
     r = 1 ; //exctinction
   } else {
-    if(nB == 0){
+    if(!trouveB){
       r = 3 ; //exclusion
     } else {
       r = 2 ; //cohabitation
@@ -334,6 +338,21 @@ int Environnement::etat_milieu(){
   return r ;
 }
 
+bool Environnement::all_dead(){
+  bool allDead = true;
+  int x = 0 ;
+  while(allDead && x<H_){
+    int y = 0 ;
+    while(allDead && y<W_){
+      if(!(grille_[x][y]->is_empty())){
+        allDead = false ;
+      }
+      y++ ;
+    }
+    x++ ;
+  }
+  return allDead ;
+}
 
 // ===========================================================================
 //                              Protected Methods

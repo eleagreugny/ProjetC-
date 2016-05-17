@@ -23,7 +23,7 @@ void passage(float Amin,float Amax,float Astep,int Tmin,int Tmax,int Tstep){
   Bacterie::WMIN = Wmin ;
   P.close() ;
 
-  std::ofstream f("sansmutD05.txt", std::ios::out | std::ios::trunc) ;
+  std::ofstream f("test.txt", std::ios::out | std::ios::trunc) ;
   float A = Amin;
   int T;
   while(A <= Amax){

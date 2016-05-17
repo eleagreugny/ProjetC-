@@ -49,6 +49,7 @@ class Environnement{
   void developpement() ;
   void changement_milieu() ;
   int etat_milieu() ;
+  bool all_dead() ;
 
 	protected :
   // =========================================================================
@@ -62,6 +63,7 @@ class Environnement{
   int W_ ; //largeur (y)
   float D_ ; //constante de diffusion
   Case*** grille_ ;
+  Case*** old_grille_ ;
   float Ainit_ ;
 };
 // ===========================================================================
